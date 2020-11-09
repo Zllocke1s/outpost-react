@@ -3,12 +3,12 @@
     "name": "React Native Simple Login Template",
     "slug": "react-native-simple-login-template",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,23 @@
       "supportsTablet": true
     },
     "description": "Simple login template created with React Native.",
-    "githubUrl": "https://github.com/venits/react-native-login-template"
+    "githubUrl": "https://github.com/venits/react-native-login-template",
+	
+	"packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    }
   }
 }

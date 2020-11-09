@@ -5,11 +5,10 @@ import { theme } from '../core/theme';
 
 const TextInput = ({ errorText, ...props }) => (
   <View style={styles.container}>
-    <Input
+    <Input 
       style={styles.input}
       selectionColor={theme.colors.primary}
       underlineColor="transparent"
-      mode="outlined"
       {...props}
     />
     {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
@@ -20,9 +19,17 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     marginVertical: 12,
+    borderWidth: 0
   },
   input: {
     backgroundColor: theme.colors.surface,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+
+
+    
   },
   error: {
     fontSize: 14,

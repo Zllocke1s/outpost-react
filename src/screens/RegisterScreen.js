@@ -1,12 +1,17 @@
 import React, { memo, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Background from '../components/Background';
-import Logo from '../components/Logo';
+import Logo from '../assets/logo.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
+import { styles } from '../styles/RegisterScreenStyle'
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+import { ScrollView } from 'react-native-gesture-handler';
+
 import {
   emailValidator,
   passwordValidator,
@@ -33,14 +38,29 @@ const RegisterScreen = ({ navigation }) => {
     navigation.navigate('Dashboard');
   };
 
-  return (
-    <Background>
+
+  const [isLoaded] = useFonts({
+    "SulphurPoint-Bold": require("../assets/fonts/SulphurPoint-Bold.ttf"),
+    "SulphurPoint-Light": require("../assets/fonts/SulphurPoint-Light.ttf"),
+    "SulphurPoint-Regular": require("../assets/fonts/SulphurPoint-Regular.ttf"),
+    });
+  if (!isLoaded) {
+    return <AppLoading />;
+  } else {
+  return (    
+  
+  <View style={[styles.container]}>
+    <View style={[styles.fixed]}>
+      <Background />
+    </View>
+    <ScrollView style={[styles.fixed, {backgroundColor: 'transparent'}]}>
+    <View style={styles.container}><BackButton goBack={() => navigation.navigate('HomeScreen')} />
       <BackButton goBack={() => navigation.navigate('HomeScreen')} />
 
       <Logo />
 
       <Header>Create Account</Header>
-
+      <View style={styles.registerBox}>
       <TextInput
         label="Name"
         returnKeyType="next"
@@ -73,35 +93,19 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+      <Button mode="contained" onPress={_onSignUpPressed} style={styles.registerButton}>
         Sign Up
       </Button>
-
+      </View>
       <View style={styles.row}>
         <Text style={styles.label}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
-      </View>
-    </Background>
+      </View></View></ScrollView></View>
   );
+  }
 };
 
-const styles = StyleSheet.create({
-  label: {
-    color: theme.colors.secondary,
-  },
-  button: {
-    marginTop: 24,
-  },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-});
 
 export default memo(RegisterScreen);
